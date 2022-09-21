@@ -34,7 +34,7 @@ function onLoadMore() {
 
 }
  
-async function fetchGallery() {
+    async function fetchGallery() {
     refs.loadMoreBtn.classList.add('is-hidden');
 
     const response = await GalleryEl.fetchGallery();
