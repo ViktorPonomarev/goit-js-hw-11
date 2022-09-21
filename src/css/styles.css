@@ -12,13 +12,8 @@ body {
   line-height: 1.5;
 }
 
-#search-box {
-  font: inherit;
-  padding: 8px;
-  max-width: 320px;
-  margin-bottom: 16px;
-}
-.country-list {
+
+/* .country-list {
   padding: 0;
 }
 
@@ -35,4 +30,4 @@ body {
 .country-info__list {
   list-style: none;
   padding: 0;
-}
+} */
