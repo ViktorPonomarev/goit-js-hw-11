@@ -1,9 +1,10 @@
+// Подключаем библиотеки
 import './css/styles.css';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import "simplelightbox/dist/simple-lightbox.min.css";
 import NewsApiGalleryService from './fetchGallery';
-
+// Достаём елементы
 const refs = {
     searchForm: document.querySelector('#search-form'),
     divEl: document.querySelector('.gallery'),
@@ -13,14 +14,18 @@ const refs = {
 
 let isShown = 0;
 
+//Переменная , чтоб получить обьект с методами и свойствами
 const GalleryEl = new NewsApiGalleryService();
-
+// Работа кнопки при сабмите формы
 refs.searchForm.addEventListener('submit', onFormSubmit);
+// Работа кнопки при Добавить ещё
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
+// Функция при при сабмите формы
 async function onFormSubmit(e) {
     e.preventDefault();
 
+    // Записуется значения инпута searchQuery
     GalleryEl.query = e.target.elements.searchQuery.value.trim();
     isShown = 0;
     refs.divEl.innerHTML = '';
@@ -28,30 +33,36 @@ async function onFormSubmit(e) {
     fetchGallery();
 }
 
+// Функция при Добавить ещё
 function onLoadMore() {
     GalleryEl.incrementPage();
     fetchGallery();
 
 }
  
-    async function fetchGallery() {
+async function fetchGallery() {
+        // Скрываем кнопку
     refs.loadMoreBtn.classList.add('is-hidden');
 
     const response = await GalleryEl.fetchGallery();
     const { hits, total } = response;
 
+    // Если бэкенд возвращает пустой массив, значит ничего подходящего найдено небыло
     if (!hits.length) {
         Notiflix.Notify.failure(
             'Sorry, there are no images matching your search query. Please try again.'
         );
     }
-    renderGallery(this);
+
+    renderGallery(hits);
 
     isShown += hits.length;
 
     if (isShown < total) {
+        // Показывае кнопку
         refs.loadMoreBtn.classList.remove('is-hidden');
     }
+    // Если пользователь дошел до конца коллекции, пряч кнопку и выводи уведомление с текстом:
     if (isShown >= total) {
         Notiflix.Notify.info(
             'We re sorry, but you have reached the end of search results.'
@@ -61,6 +72,7 @@ function onLoadMore() {
 
 // Рисуем карточки
 function renderGallery(elements) {
+    console.log(elements);
     const markup = elements.map(({
         webformatURL,
         largeImageURL,
@@ -96,7 +108,7 @@ function renderGallery(elements) {
             </a>`;
     })
         .join('');
-    
-    refs.divEl.insertAdjacentElement('beforeend', markup);
+    // Добавляем на галерею карточек библиотеку SimpleLightbox
+    refs.divEl.insertAdjacentHTML('beforeend', markup);
     const simpleLightbox = new SimpleLightbox('.gallery a');
 }
