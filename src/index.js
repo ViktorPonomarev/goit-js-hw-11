@@ -23,7 +23,7 @@ refs.searchForm.addEventListener('submit', onFormSubmit);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 // Делаем не активную кнопку
-// refs.startBtn.disabled = true;
+refs.startBtn.disabled = true;
 
 // Функция при при сабмите формы
 async function onFormSubmit(e) {
