@@ -14,9 +14,6 @@ body {
 
 /* Форма */
 
-
-
-
 .search-form {
   text-align: center;
   display: flex;
@@ -38,6 +35,11 @@ input {
 input:hover {
   transform: scale(1.1);
 }
+
+/* input:focus {
+  border: none;
+  border: 2px solid rgba(241, 7, 7, 0.718);
+} */
 
 /* Кнопки */
 .is-hidden {

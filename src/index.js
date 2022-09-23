@@ -8,7 +8,8 @@ import NewsApiGalleryService from './fetchGallery';
 const refs = {
     searchForm: document.querySelector('#search-form'),
     divEl: document.querySelector('.gallery'),
-    loadMoreBtn: document.querySelector('.load-more')
+    loadMoreBtn: document.querySelector('.load-more'),
+    startBtn: document.querySelector('button[data-start]')
    
 }
 
@@ -20,6 +21,9 @@ const GalleryEl = new NewsApiGalleryService();
 refs.searchForm.addEventListener('submit', onFormSubmit);
 // Работа кнопки при Добавить ещё
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
+
+// Делаем не активную кнопку
+// refs.startBtn.disabled = true;
 
 // Функция при при сабмите формы
 async function onFormSubmit(e) {
@@ -43,7 +47,7 @@ function onLoadMore() {
 async function fetchGallery() {
         // Скрываем кнопку
     refs.loadMoreBtn.classList.add('is-hidden');
-
+    // refs.startBtn.disabled = false;
     const response = await GalleryEl.fetchGallery();
     const { hits, total } = response;
 
@@ -61,7 +65,7 @@ async function fetchGallery() {
     if (isShown < total) {
         // Показывае кнопку
         refs.loadMoreBtn.classList.remove('is-hidden');
-        
+
     }
     // Если пользователь дошел до конца коллекции, пряч кнопку и выводи уведомление с текстом:
     if (isShown >= total) {
