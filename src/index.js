@@ -61,6 +61,7 @@ async function fetchGallery() {
     if (isShown < total) {
         // Показывае кнопку
         refs.loadMoreBtn.classList.remove('is-hidden');
+        
     }
     // Если пользователь дошел до конца коллекции, пряч кнопку и выводи уведомление с текстом:
     if (isShown >= total) {
