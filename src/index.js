@@ -22,11 +22,6 @@ refs.searchForm.addEventListener('submit', onFormSubmit);
 // Работа кнопки при Добавить ещё
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
-
-
-
-
-
 // Функция при при сабмите формы
 async function onFormSubmit(e) {
     e.preventDefault();
