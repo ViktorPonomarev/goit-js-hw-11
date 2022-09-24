@@ -21,13 +21,21 @@ const GalleryEl = new NewsApiGalleryService();
 refs.searchForm.addEventListener('submit', onFormSubmit);
 // Работа кнопки при Добавить ещё
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
+// Работа с кнопкой старт
+refs.startBtn.addEventListener('click', onSearchBtn);
 
-// Делаем не активную кнопку
-refs.startBtn.disabled = true;
+
+// // Делаем не активную кнопку
+// function onSearchBtn() {
+//     refs.startBtn.disabled = true;
+// }
+
 
 // Функция при при сабмите формы
 async function onFormSubmit(e) {
     e.preventDefault();
+
+        // refs.startBtn.disabled = false;
 
     // Записуется значения инпута searchQuery
     GalleryEl.query = e.target.elements.searchQuery.value.trim();
@@ -47,6 +55,7 @@ function onLoadMore() {
 async function fetchGallery() {
         // Скрываем кнопку
     refs.loadMoreBtn.classList.add('is-hidden');
+    
     // refs.startBtn.disabled = false;
     const response = await GalleryEl.fetchGallery();
     const { hits, total } = response;
