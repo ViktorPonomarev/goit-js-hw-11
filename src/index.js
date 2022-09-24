@@ -9,8 +9,8 @@ const refs = {
     searchForm: document.querySelector('#search-form'),
     divEl: document.querySelector('.gallery'),
     loadMoreBtn: document.querySelector('.load-more'),
-    startBtn: document.querySelector('button[data-start]')
-   
+    startBtn: document.querySelector('button[data-start]'),
+    inputform: document.querySelector('input')
 }
 
 let isShown = 0;
@@ -22,10 +22,16 @@ refs.searchForm.addEventListener('submit', onFormSubmit);
 // Работа кнопки при Добавить ещё
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 // Работа с кнопкой старт
-refs.startBtn.addEventListener('click', onSearchBtn);
+// refs.startBtn.addEventListener('click', onSearchBtn);
+// Работа с инпутом
+// refs.inputform.addEventListener('submit', onInputForm);
+
+// function onInputForm() {
+//     refs.startBtn.disabled = true;
+// } 
 
 
-// // Делаем не активную кнопку
+// Делаем не активную кнопку
 // function onSearchBtn() {
 //     refs.startBtn.disabled = true;
 // }
@@ -35,14 +41,20 @@ refs.startBtn.addEventListener('click', onSearchBtn);
 async function onFormSubmit(e) {
     e.preventDefault();
 
-        // refs.startBtn.disabled = false;
-
+    if (e.currentTarget.elements.searchQuery.value) {
+        return innerHTML = '';
+     }
+       
     // Записуется значения инпута searchQuery
     GalleryEl.query = e.target.elements.searchQuery.value.trim();
     isShown = 0;
     refs.divEl.innerHTML = '';
     GalleryEl.resetPage();
     fetchGallery();
+
+    // if (GalleryEl.query.length > 1) {
+    //     refs.startBtn.disabled = false;
+    // }
 }
 
 // Функция при Добавить ещё
